@@ -22,6 +22,10 @@
    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
    crossorigin=""></script>
+   <link href="<?php echo base_url();?>/assets/css/speedometer.css" rel="stylesheet">
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="<?php echo base_url();?>/assets/js/speedometer.js"></script>
+
    <style>
        /* Set the size of the div element that contains the map */
       #map {
@@ -29,6 +33,7 @@
         width: 100%;  /* The width is the width of the web page */
        }
 	   #mapid { height: 380px; }
+	   /* .inin{padding:0px} */
     </style>
 </head>
 

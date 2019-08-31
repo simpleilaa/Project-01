@@ -187,8 +187,9 @@
         <div class="card-body">
           <div class="row">
             <div class="col">
-                <span style="margin-left: 30px;"><?php echo number_format($fieldhumidity[count($fieldtemperature)-1]['value'],2) ?>%</span>
-                <span class="hum"></span>​
+                <!-- <span style="margin-left: 30px;"><?php echo number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2) ?>%</span> -->
+                <!-- <span class="hum"></span>​ -->
+                <input id="humidity" type="hidden" style="width:inherit">
             </div>
             <div class="col-auto">
             </div>
@@ -225,7 +226,8 @@
         <div class="card-body">
           <div class="row">
             <div class="col"><br><br><br>
-                <span class="alt"><b><?php echo number_format($fieldaltitude[count($fieldtemperature)-1]['value'],2) ?></b> m</span>
+                <!-- <span class="alt"><b><?php echo number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2) ?></b> m</span> -->
+                <input id="altitude" type="hidden" style="width:inherit">
             </div>
             <div class="col-auto">
             </div>
@@ -262,7 +264,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col"><br><br><br>
-                <span class="alt"><b><?php echo number_format($fieldpressure[count($fieldtemperature)-1]['value'],2) ?></b> hPa</span>
+                <span class="alt"><b><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2) ?></b> hPa</span>
             </div>
             <div class="col-auto">
             </div>
@@ -443,6 +445,18 @@
             }
         }
     });
+</script>
+<!-- <script src="<?=base_url()?>assets/js/jquery.js"></script> -->
+<script>
+        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%'});
+        $("#humidity").val(<?=number_format($fieldhumidity[count($fieldtemperature)-1]['value'],2)?>);
+        $("#humidity").trigger("keyup");
+
+        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m'});
+        $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
+        $("#altitude").trigger("keyup");
+
+        $(".envelope").addClass('inin');
 </script>
 <script>
     // console.log("latC = "+$("#latC").val());
