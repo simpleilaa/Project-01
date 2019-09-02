@@ -80,6 +80,7 @@ class Admin extends CI_Controller {
 			$getChannel = Channels::where('channel_id',$id)->get();
 			$channel = json_decode($this->curl->simple_get($this->API . 'channels/'.$id.'/feeds.json?api_key='.$getChannel[0]['channel_key']));
 			$entry = array();
+			$entid = array();
 			foreach($channel->feeds as $val){
 				for($i=1;$i<=$getChannel[0]['channel_field'];$i++){
 					$field = 'field'.$i;
@@ -92,9 +93,12 @@ class Admin extends CI_Controller {
 						'created_at'	=> $val->created_at,
 						'updated_at'	=> $val->created_at
 					));
+					array_push($entid,$val->entry_id);
 				}
 			}
-			Entrys::where('channel_id',$id)->delete();
+			for($i=0;$i<count($entid);$i++){
+				Entrys::where('channel_id',$id)->where('entry_id',$entid[$i])->delete();
+			}
 			Entrys::insert($entry);
 
 			$temperature = 0;
@@ -165,6 +169,7 @@ class Admin extends CI_Controller {
 			$getChannel = Channels::where('channel_id',$id)->get();
 			$channel = json_decode($this->curl->simple_get($this->API . 'channels/'.$id.'/feeds.json?api_key='.$getChannel[0]['channel_key']));
 			$entry = array();
+			$entid = array();
 			foreach($channel->feeds as $val){
 				for($i=1;$i<=$getChannel[0]['channel_field'];$i++){
 					$field = 'field'.$i;
@@ -177,9 +182,14 @@ class Admin extends CI_Controller {
 						'created_at'	=> $val->created_at,
 						'updated_at'	=> $val->created_at
 					));
+					array_push($entid,$val->entry_id);
 				}
 			}
-			Entrys::where('channel_id',$id)->delete();
+			// var_dump($entry);
+			// return false;
+			for($i=0;$i<count($entid);$i++){
+				Entrys::where('channel_id',$id)->where('entry_id',$entid[$i])->delete();
+			}
 			Entrys::insert($entry);
 
 			$temperature = 0;
