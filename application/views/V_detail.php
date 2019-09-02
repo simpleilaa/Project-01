@@ -148,8 +148,8 @@
         <h4>CURRENT LOCATION</h4>
     </center>
     <div id="mapid"></div>
-    <input type="hidden" id="latA" name="latA" value="<?=$fieldlat[count($fieldtemperature)-1]['value']?>">
-    <input type="hidden" id="lngA" name="lngA" value="<?=$fieldlng[count($fieldtemperature)-1]['value']?>">
+    <input type="hidden" id="latA" name="latA" value="<?=$fieldlat[count($fieldlat)-1]['value']?>">
+    <input type="hidden" id="lngA" name="lngA" value="<?=$fieldlng[count($fieldlng)-1]['value']?>">
   <br>
 <?php } ?>
 
