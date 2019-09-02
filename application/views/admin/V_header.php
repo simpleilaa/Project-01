@@ -65,10 +65,10 @@
 								<i class="ni ni-single-02"></i>
 								<span>My profile</span>
 							</a> -->
-							<a href="./examples/profile.html" class="dropdown-item">
+							<!-- <a href="./examples/profile.html" class="dropdown-item">
 								<i class="ni ni-settings-gear-65"></i>
 								<span>Settings</span>
-							</a>
+							</a> -->
 							<!-- <a href="./examples/profile.html" class="dropdown-item">
 								<i class="ni ni-calendar-grid-58"></i>
 								<span>Activity</span>
@@ -78,7 +78,7 @@
 								<span>Support</span>
 							</a> -->
 							<div class="dropdown-divider"></div>
-							<a href="<?php echo base_url('administrator/logoutt');?>" class="dropdown-item">
+							<a href="<?php echo base_url('login/logout');?>" class="dropdown-item">
 								<i class="ni ni-user-run"></i>
 								<span>Logout</span>
 							</a>
