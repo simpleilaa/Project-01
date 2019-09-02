@@ -128,7 +128,19 @@
       </div>
   </div>
 
-  
+  <form class="form-inline row" method="get" action="#">
+        <div class="col-md-12">
+            <select name="setview_time" class="form-control form-control-sm mb-2 col-md-12">
+                <option value="0">All</option>
+                <option value="10">10 Menit Terakhir</option>
+                <option value="30">30 Menit Terakhir</option>
+                <option value="60">1 Jam Terakhir</option>
+                <option value="180">3 Jam Terakhir</option>
+                <option value="720">12 Jam Terakhir</option>
+            </select>
+            <button type="submit" class="btn btn-primary mb-2 btn-sm">Submit</button>
+        </div>       
+    </form>
 
 <?php if($location ==1){?>
 <br>
@@ -450,15 +462,20 @@
 </script>
 <!-- <script src="<?=base_url()?>assets/js/jquery.js"></script> -->
 <script>
-        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%'});
-        $("#humidity").val(<?=number_format($fieldhumidity[count($fieldtemperature)-1]['value'],2)?>);
-        $("#humidity").trigger("keyup");
+        // console.log('cek: '+$("#humidity").length);
 
+        if($("#humidity").length){
+        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%'});
+        $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
+        $("#humidity").trigger("keyup");
+        }
+</script>
+<script>
+    if($("#altitude").length){
         $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m'});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
-
-        $(".envelope").addClass('inin');
+        }
 </script>
 <script>
     // console.log("latC = "+$("#latC").val());

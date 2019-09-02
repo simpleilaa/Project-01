@@ -63,11 +63,104 @@ class Admin extends CI_Controller {
 		}
 	}
 
+
 	public function detail($id)
 	{
 		
 		if(isset($_GET['setview_time'])&&$_GET['setview_time']!=0&&$_GET['setview_time']!=''){
 			$setview = $_GET['setview_time'];
+			if(function_exists('date_default_timezone_set')) date_default_timezone_set('Asia/Jakarta');
+			$date = strtotime(date('Y-m-d H:i:s'));
+			$selisih = $date-($setview*60);
+			$date2 = strtotime(date('Y-m-d H:i:s',$selisih));
+			$date2 = date('Y-m-d H:i:s',$date2);
+			// var_dump('waktu sekarang'.date('Y-m-d H:i:s',$date).'<br>waktu selisih: '.$date2);
+			// return false;
+			
+			$getChannel = Channels::where('channel_id',$id)->get();
+			$channel = json_decode($this->curl->simple_get($this->API . 'channels/'.$id.'/feeds.json?api_key='.$getChannel[0]['channel_key']));
+			$entry = array();
+			foreach($channel->feeds as $val){
+				for($i=1;$i<=$getChannel[0]['channel_field'];$i++){
+					$field = 'field'.$i;
+					array_push($entry,array(
+						'channel_id' 	=> $id,
+						'name_field' 	=> $channel->channel->$field,
+						'value' 		=> $val->$field,
+						'field'			=> $field,
+						'entry_id'		=> $val->entry_id,
+						'created_at'	=> $val->created_at,
+						'updated_at'	=> $val->created_at
+					));
+				}
+			}
+			Entrys::where('channel_id',$id)->delete();
+			Entrys::insert($entry);
+
+			$temperature = 0;
+			$location = 0;
+			$humidity = 0;
+			$pressure = 0;
+			$altitude = 0;
+			$fieldtemperature = '';
+			$fieldlat = '';
+			$fieldlng = '';
+			$fieldhumidity = '';
+			$fieldpressure = '';
+			$fieldaltitude = '';
+			$ent = Entrys::where('channel_id',$id)->limit($getChannel[0]['channel_field'])->where('created_at', '>=',$date2)->get();
+			
+			foreach($ent as $key=>$value){
+				$fields = strtolower($value->name_field);
+				$fields = explode(' ',$fields);
+				for($i=0;$i<count($fields);$i++){
+					if($fields[$i] == 'temperature'){
+						$temperature = 1;
+						$fieldtemperature = $value->field;
+					}
+					if($fields[$i] == 'latitude'){
+						$location = 1;
+						$fieldlat = $value->field;
+					}
+					if($fields[$i] == 'longitude'){
+						$location = 1;
+						$fieldlng = $value->field;
+					}
+					if($fields[$i] == 'humidity'){
+						$humidity = 1;
+						$fieldhumidity = $value->field;
+					}
+					if($fields[$i] == 'pressure'){
+						$pressure = 1;
+						$fieldpressure = $value->field;
+					}
+					if($fields[$i] == 'altitude'){
+						$altitude = 1;
+						$fieldaltitude = $value->field;
+					}
+				}
+			// var_dump($value->name_field);
+			}
+			// return false;
+			$limit = 6 * $getChannel[0]['channel_field'];
+			$data['channels'] = Entrys::where('channel_id',$id)->limit($limit)->where('created_at', '>=',$date2)->get();
+			$data['temperature']=$temperature;
+			$data['location']=$location;
+			$data['humidity']=$humidity;
+			$data['pressure']=$pressure;
+			$data['altitude']=$altitude;
+			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->limit(10)->orderBy('created_at','DESC')->get();
+			// var_dump($data['fieldhumidity'][count($data['fieldhumidity'])-1]['value']);
+			// return false;
+			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['channelid']=$id;
+			// $data['from'] = '';
+			// $data['to'] = '';
+			
 		}else{
 			$getChannel = Channels::where('channel_id',$id)->get();
 			$channel = json_decode($this->curl->simple_get($this->API . 'channels/'.$id.'/feeds.json?api_key='.$getChannel[0]['channel_key']));
@@ -88,66 +181,72 @@ class Admin extends CI_Controller {
 			}
 			Entrys::where('channel_id',$id)->delete();
 			Entrys::insert($entry);
-		}
-		$temperature = 0;
-		$location = 0;
-		$humidity = 0;
-		$pressure = 0;
-		$altitude = 0;
-		$fieldtemperature = '';
-		$fieldlat = '';
-		$fieldlng = '';
-		$fieldhumidity = '';
-		$fieldpressure = '';
-		$fieldaltitude = '';
-		$ent = Entrys::where('channel_id',$id)->limit($getChannel[0]['channel_field'])->get();
-		
-		foreach($ent as $key=>$value){
-			$fields = strtolower($value->name_field);
-			$fields = explode(' ',$fields);
-			for($i=0;$i<count($fields);$i++){
-				if($fields[$i] == 'temperature'){
-					$temperature = 1;
-					$fieldtemperature = $value->field;
+
+			$temperature = 0;
+			$location = 0;
+			$humidity = 0;
+			$pressure = 0;
+			$altitude = 0;
+			$fieldtemperature = '';
+			$fieldlat = '';
+			$fieldlng = '';
+			$fieldhumidity = '';
+			$fieldpressure = '';
+			$fieldaltitude = '';
+			$ent = Entrys::where('channel_id',$id)->limit($getChannel[0]['channel_field'])->get();
+			
+			foreach($ent as $key=>$value){
+				$fields = strtolower($value->name_field);
+				$fields = explode(' ',$fields);
+				for($i=0;$i<count($fields);$i++){
+					if($fields[$i] == 'temperature'){
+						$temperature = 1;
+						$fieldtemperature = $value->field;
+					}
+					if($fields[$i] == 'latitude'){
+						$location = 1;
+						$fieldlat = $value->field;
+					}
+					if($fields[$i] == 'longitude'){
+						$location = 1;
+						$fieldlng = $value->field;
+					}
+					if($fields[$i] == 'humidity'){
+						$humidity = 1;
+						$fieldhumidity = $value->field;
+					}
+					if($fields[$i] == 'pressure'){
+						$pressure = 1;
+						$fieldpressure = $value->field;
+					}
+					if($fields[$i] == 'altitude'){
+						$altitude = 1;
+						$fieldaltitude = $value->field;
+					}
 				}
-				if($fields[$i] == 'latitude'){
-					$location = 1;
-					$fieldlat = $value->field;
-				}
-				if($fields[$i] == 'longitude'){
-					$location = 1;
-					$fieldlng = $value->field;
-				}
-				if($fields[$i] == 'humidity'){
-					$humidity = 1;
-					$fieldhumidity = $value->field;
-				}
-				if($fields[$i] == 'pressure'){
-					$pressure = 1;
-					$fieldpressure = $value->field;
-				}
-				if($fields[$i] == 'altitude'){
-					$altitude = 1;
-					$fieldaltitude = $value->field;
-				}
+			// var_dump($value->name_field);
 			}
-		// var_dump($value->name_field);
+			// return false;
+			$limit = 6 * $getChannel[0]['channel_field'];
+			$data['channels'] = Entrys::where('channel_id',$id)->limit($limit)->get();
+			$data['temperature']=$temperature;
+			$data['location']=$location;
+			$data['humidity']=$humidity;
+			$data['pressure']=$pressure;
+			$data['altitude']=$altitude;
+			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->limit(10)->orderBy('created_at','DESC')->get();
+			// var_dump($data['fieldhumidity'][count($data['fieldhumidity'])-1]['value']);
+			// return false;
+			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['channelid']=$id;
+			// $data['from'] = '';
+			// $data['to'] = '';
 		}
-		// return false;
-		$limit = 6 * $getChannel[0]['channel_field'];
-		$data['channels'] = Entrys::where('channel_id',$id)->limit($limit)->get();
-		$data['temperature']=$temperature;
-		$data['location']=$location;
-		$data['humidity']=$humidity;
-		$data['pressure']=$pressure;
-		$data['altitude']=$altitude;
-		$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->limit(10)->orderBy('created_at','DESC')->get();
-		$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->limit(10)->orderBy('created_at','DESC')->get();
-		$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->limit(10)->orderBy('created_at','DESC')->get();
-		$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->limit(10)->orderBy('created_at','DESC')->get();
-		$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->limit(10)->orderBy('created_at','DESC')->get();
-		$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->limit(10)->orderBy('created_at','DESC')->get();
-		$data['channelid']=$id;
+		
 		$this->load->view('admin/V_header');
 		$this->load->view('admin/V_detail',$data);
 		$this->load->view('admin/V_footer');
