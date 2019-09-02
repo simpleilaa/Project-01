@@ -128,6 +128,8 @@
       </div>
   </div>
 
+  
+
 <?php if($location ==1){?>
 <br>
     <center>
@@ -183,18 +185,19 @@
   </div>
   <div class="col-5">
     <label class="title-label">Humidity</label>
-    <div class="card card-stats mb-4 mb-xl-0">
+    <!-- <div class="card card-stats mb-4 mb-xl-0">
         <div class="card-body">
           <div class="row">
-            <div class="col">
-                <span style="margin-left: 30px;"><?php echo number_format($fieldhumidity[count($fieldtemperature)-1]['value'],2) ?>%</span>
-                <span class="hum"></span>​
-            </div>
+            <div class="col"> -->
+                <!-- <span style="margin-left: 30px;"><?php echo number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2) ?>%</span> -->
+                <!-- <span class="hum"></span>​ -->
+                <input id="humidity" type="hidden" style="width:inherit">
+            <!-- </div>
             <div class="col-auto">
             </div>
         </div>
     </div>
-</div>
+</div> -->
 </div>
 <div class="col-5">
     <label class="title-label">Humidity Result Card</label>
@@ -221,17 +224,18 @@
   </div>
   <div class="col-5">
     <label class="title-label">Altitude</label>
-    <div class="card card-stats mb-4 mb-xl-0">
+    <!-- <div class="card card-stats mb-xl-0">
         <div class="card-body">
           <div class="row">
-            <div class="col"><br><br><br>
-                <span class="alt"><b><?php echo number_format($fieldaltitude[count($fieldtemperature)-1]['value'],2) ?></b> m</span>
-            </div>
+            <div class="col"> -->
+                <!-- <span class="alt"><b><?php echo number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2) ?></b> m</span> -->
+                <input id="altitude" type="hidden" style="width:inherit">
+            <!-- </div>
             <div class="col-auto">
             </div>
         </div>
     </div>
-</div>
+</div> -->
 </div>
 <div class="col-5">
     <label class="title-label">Altitude Result Card</label>
@@ -262,7 +266,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col"><br><br><br>
-                <span class="alt"><b><?php echo number_format($fieldpressure[count($fieldtemperature)-1]['value'],2) ?></b> hPa</span>
+                <span class="alt"><b><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2) ?></b> hPa</span>
             </div>
             <div class="col-auto">
             </div>
@@ -443,6 +447,18 @@
             }
         }
     });
+</script>
+<!-- <script src="<?=base_url()?>assets/js/jquery.js"></script> -->
+<script>
+        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%'});
+        $("#humidity").val(<?=number_format($fieldhumidity[count($fieldtemperature)-1]['value'],2)?>);
+        $("#humidity").trigger("keyup");
+
+        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m'});
+        $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
+        $("#altitude").trigger("keyup");
+
+        $(".envelope").addClass('inin');
 </script>
 <script>
     // console.log("latC = "+$("#latC").val());

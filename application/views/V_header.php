@@ -33,7 +33,44 @@
         width: 100%;  /* The width is the width of the web page */
        }
 	   #mapid { height: 380px; }
-	   /* .inin{padding:0px} */
+	   /* .inin{width:100% !important;height:100% !important;} */
+	   /* .envelope{width :225px !important;height :225px !important;} */
+	   
+/* 
+	   .speedNobe
+	   {
+			height :4px !important;top :148px !important;transform :rotate(-45deg) !important;
+			-webkit-transform :rotate(-45deg) !important;
+			-moz-transform    :rotate(-45deg) !important;
+			-o-transform      :rotate(-45deg) !important;
+		}
+		.speedPosition
+		{
+			width  :80px !important;
+			height :80px !important;top  :110px !important;
+			left :110px !important;
+		}
+		.speedNobe div
+		{
+			width  :95px !important;
+			left :13px !important;
+		}
+		.nob
+		{
+			width  :20px !important;
+			height :4px !important;
+		}
+		.numb
+		{
+			width  :30px !important;
+			height :16px !important;
+		}
+		.midNob
+		{
+			width  :10px !important;
+			height :3px !important;
+		} */
+
     </style>
 </head>
 

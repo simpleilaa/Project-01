@@ -26,7 +26,9 @@ class Login extends CI_Controller {
 		$password=$this->input->post('password');
 		
 		$cek = Users::where('username',$username)->where('password',$password)->get();
-		if ($cek>0) {
+		// var_dump(count($cek));
+		// return false;
+		if (count($cek)>0) {
 			if($cek[0]['role']=='user'){
 				$data_session = array(
 					'username' => $username,
@@ -46,7 +48,10 @@ class Login extends CI_Controller {
 			}
 			// print_r($data_session);
 		}else{
-			redirect(base_url());
+			echo '
+				<script>alert("invalid username or password");window.location.href="'.base_url().'";</script>
+			';
+			// redirect(base_url());
 		}
 	}
 	public function logout(){

@@ -128,6 +128,8 @@
       </div>
   </div>
 
+  
+
 <?php if($location ==1){?>
 <br>
     <center>
@@ -183,19 +185,19 @@
   </div>
   <div class="col-5">
     <label class="title-label">Humidity</label>
-    <div class="card card-stats mb-4 mb-xl-0">
+    <!-- <div class="card card-stats mb-4 mb-xl-0">
         <div class="card-body">
           <div class="row">
-            <div class="col">
+            <div class="col"> -->
                 <!-- <span style="margin-left: 30px;"><?php echo number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2) ?>%</span> -->
                 <!-- <span class="hum"></span>​ -->
                 <input id="humidity" type="hidden" style="width:inherit">
-            </div>
+            <!-- </div>
             <div class="col-auto">
             </div>
         </div>
     </div>
-</div>
+</div> -->
 </div>
 <div class="col-5">
     <label class="title-label">Humidity Result Card</label>
@@ -222,18 +224,18 @@
   </div>
   <div class="col-5">
     <label class="title-label">Altitude</label>
-    <div class="card card-stats mb-4 mb-xl-0">
+    <!-- <div class="card card-stats mb-xl-0">
         <div class="card-body">
           <div class="row">
-            <div class="col"><br><br><br>
+            <div class="col"> -->
                 <!-- <span class="alt"><b><?php echo number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2) ?></b> m</span> -->
                 <input id="altitude" type="hidden" style="width:inherit">
-            </div>
+            <!-- </div>
             <div class="col-auto">
             </div>
         </div>
     </div>
-</div>
+</div> -->
 </div>
 <div class="col-5">
     <label class="title-label">Altitude Result Card</label>
