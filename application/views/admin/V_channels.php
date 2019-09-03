@@ -18,12 +18,13 @@
 			?>
 			<div class="card-header" style="border-radius: 5px">
 				<div class="row align-items-center">
-					<div class="col">
+					<div class="col-md-8 col-sm-12 col-12 mb-2">
 						<strong class="mb-0"><?=$value->channel_name?></strong>
 						<small class="mb-0">Channels ID : <?=$value->channel_id?></small>
 					</div>
-					<div class="col text-right">
+					<div class="col-md-4 col-sm-12 col-12 text-right">
 						<a href="<?=base_url()?>admin/edit_channels/<?=$value->id?>" class="btn btn-sm btn-primary">Edit</a>
+						<a href="<?=base_url()?>admin/delete_channels/<?=$value->id?>" onclick="confirm('Are you sure to delete this channel?')"class="btn btn-sm btn-primary">Delete</a>
 						<a href="<?=base_url()?>admin/detail/<?=$value->channel_id?>" class="btn btn-sm btn-primary">View</a>
 					</div>
 				</div>

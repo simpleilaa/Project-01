@@ -33,43 +33,35 @@
         width: 100%;  /* The width is the width of the web page */
        }
 	   #mapid { height: 380px; }
-	   /* .inin{width:100% !important;height:100% !important;} */
-	   /* .envelope{width :225px !important;height :225px !important;} */
-	   
-/* 
-	   .speedNobe
+	   #speedometerWraper-humidity .envelope
 	   {
-			height :4px !important;top :148px !important;transform :rotate(-45deg) !important;
-			-webkit-transform :rotate(-45deg) !important;
-			-moz-transform    :rotate(-45deg) !important;
-			-o-transform      :rotate(-45deg) !important;
-		}
-		.speedPosition
-		{
-			width  :80px !important;
-			height :80px !important;top  :110px !important;
-			left :110px !important;
-		}
-		.speedNobe div
-		{
-			width  :95px !important;
-			left :13px !important;
-		}
-		.nob
-		{
-			width  :20px !important;
-			height :4px !important;
-		}
-		.numb
-		{
-			width  :30px !important;
-			height :16px !important;
-		}
-		.midNob
-		{
-			width  :10px !important;
-			height :3px !important;
-		} */
+		   background-color: rgba(238,130,238, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(238,130,238, 1) !important;
+	   }
+	   #speedometerWraper-humidity .speedPosition
+	   {
+		   background-color: rgba(238,130,238, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(238,130,238, 1) !important;
+	   }
+
+	   #speedometerWraper-altitude .envelope
+	   {
+		   background-color: rgba(0,128,0, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(0,128,0, 1) !important;
+	   }
+	   #speedometerWraper-altitude .speedPosition
+	   {
+		   background-color: rgba(0,128,0, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(0,128,0, 1) !important;
+	   }
+	   #speedometerWraper-humidity .speedNobe div
+	   {
+		   background-color: rgba(255,255,255, 1) !important;
+	   }
+	   #speedometerWraper-altitude .speedNobe div
+	   {
+		   background-color: rgba(255,255,255, 1) !important;
+	   }
 
     </style>
 </head>
@@ -80,7 +72,9 @@
 		<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
 			<div class="container-fluid">
 				<!-- Brand -->
-				<a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="<?=base_url()?>">Logo</a>
+				<a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="<?=base_url()?>">
+	   				<img src="<?=base_url()?>assets/img/logo.png" class="img-fluid" style="width:100px">
+				</a>
 				<!-- Form -->
 
 				<!-- User -->

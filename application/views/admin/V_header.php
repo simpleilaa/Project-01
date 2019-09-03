@@ -33,6 +33,35 @@
         width: 100%;  /* The width is the width of the web page */
        }
 	   #mapid { height: 380px; }
+	   #speedometerWraper-humidity .envelope
+	   {
+		   background-color: rgba(238,130,238, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(238,130,238, 1) !important;
+	   }
+	   #speedometerWraper-humidity .speedPosition
+	   {
+		   background-color: rgba(238,130,238, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(238,130,238, 1) !important;
+	   }
+
+	   #speedometerWraper-altitude .envelope
+	   {
+		   background-color: rgba(0,128,0, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(0,128,0, 1) !important;
+	   }
+	   #speedometerWraper-altitude .speedPosition
+	   {
+		   background-color: rgba(0,128,0, 1) !important;
+		   box-shadow: 0 0 3px 3px rgba(0,128,0, 1) !important;
+	   }
+	   #speedometerWraper-humidity .speedNobe div
+	   {
+		   background-color: rgba(255,255,255, 1) !important;
+	   }
+	   #speedometerWraper-altitude .speedNobe div
+	   {
+		   background-color: rgba(255,255,255, 1) !important;
+	   }
     </style>
 </head>
 
@@ -42,7 +71,9 @@
 		<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
 			<div class="container-fluid">
 				<!-- Brand -->
-				<a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="<?=base_url()?>">Logo</a>
+				<a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="<?=base_url()?>">
+	   				<img src="<?=base_url()?>assets/img/logo.png" class="img-fluid" style="width:100px">
+				</a>
 				<!-- Form -->
 
 				<!-- User -->
