@@ -8,6 +8,8 @@ class Channels extends Eloquent {
     protected $fillable = ['channel_id', 
                             'channel_name', 
                             'channel_key',
-                            'channel_field'];
+                            'channel_field',
+                            'channel_result',
+                            'channel_refresh'];
     public $timestamps = true;
 }

@@ -118,191 +118,173 @@
 <div class="container-fluid mt--7">
     <div class="row">
         <div class="col-12">
-          <?php if($location ==1){?>
-            <h2 style="color: white">&nbsp;&nbsp;&nbsp;&nbsp;TRACKING</h2>
-          <?php }else{?>
-            <h2 style="color: white">&nbsp;&nbsp;&nbsp;&nbsp;NON TRACKING</h2>
-          <?php } ?>
-          <h2 style="color: white">CHANNELS ID : <?php echo $channelid; ?></h2>
+            <a href="<?=base_url()?>" class="btn btn-primary mb-2 btn-sm">Back to List Channel</a>
+            <h3 style="color: white"><?=$channelname[0]['channel_name']?></h3>
+            <h4 style="color: white">CHANNELS ID : <?php echo $channelid; ?></h4>
           <br>
       </div>
   </div>
+  <div class="row">
+        <div class="col-md-2 col-sm-2"></div>
+        <form class="form-inline col-md-8 col-sm-8" method="get" action="#">
+                <div class="col-md-12 col-sm-12">
+                    <select name="setview_time" class="form-control form-control-sm mb-2">
+                        <option value="0">All</option>
+                        <option value="10">10 minutes</option>
+                        <option value="30">30 minutes</option>
+                        <option value="60">1 hour</option>
+                        <option value="180">3 hours</option>
+                        <option value="720">12 hours</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary mb-2 btn-sm form-control-sm">Range of Graph</button>
+                </div>       
+            </form>
+        <div class="col-md-2 col-sm-2"></div>
+    </div>
 
-    <form class="form-inline row" method="get" action="#">
-        <div class="col-md-12">
-            <select name="setview_time" class="form-control form-control-sm mb-2 col-md-12">
-                <option value="0">All</option>
-                <option value="10">10 Menit Terakhir</option>
-                <option value="30">30 Menit Terakhir</option>
-                <option value="60">1 Jam Terakhir</option>
-                <option value="180">3 Jam Terakhir</option>
-                <option value="720">12 Jam Terakhir</option>
-            </select>
-            <button type="submit" class="btn btn-primary mb-2 btn-sm">Submit</button>
-        </div>       
-    </form>
-    
+<!-- maps -->
 <?php if($location ==1){?>
-<br>
-    <center>
-        <h4>CURRENT LOCATION</h4>
-    </center>
-    <div id="mapid"></div>
-    <input type="hidden" id="latA" name="latA" value="<?=$fieldlat[count($fieldlat)-1]['value']?>">
-    <input type="hidden" id="lngA" name="lngA" value="<?=$fieldlng[count($fieldlng)-1]['value']?>">
-  <br>
+    <div class="row">
+        <div class="col-md-2 col-sm-2"></div>
+        </div class="col-md-8 col-sm-8">
+            <center>
+                <h4>CURRENT LOCATION</h4>
+                <div class="row">
+                    <div class="col-md-2 col-sm-3 col-1"></div>
+                    <div id="mapid" class="col-md-8 col-sm-6 col-10"></div>
+                    <div class="col-md-2 col-sm-3 col-1"></div>
+                    <input type="hidden" id="latA" name="latA" value="<?=$fieldlat[count($fieldlat)-1]['value']?>">
+                    <input type="hidden" id="lngA" name="lngA" value="<?=$fieldlng[count($fieldlng)-1]['value']?>">
+                </div>
+            </center>
+        </div>
+        </div class="col-md-2 col-sm-2"></div>
+    </div>    
+    <br><br>
+<?php } ?>
+    
+<!-- temperature -->
+<?php if($temperature ==1){?>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-12">
+            <center><label class="title-label">Temperature</label><center>
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <span style="margin-left: 30px;"><?php echo number_format($fieldtemperature[count($fieldtemperature)-1]['value'],2) ?>°C</span>
+                            <span class="thermometer"></span>​
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-12">
+            <center><label class="title-label">Temperature Graph</label><center>
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="a" width="100" height="100"></canvas>
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
 <?php } ?>
 
-<?php if($temperature==1){?>
-  <div class="row" style="text-align: -webkit-center;">
-      <div class="col-1">
-      </div>
-      <div class="col-5">
-        <label class="title-label">Temperature</label>
-        <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                    <span style="margin-left: 30px;"><?php echo number_format($fieldtemperature[count($fieldtemperature)-1]['value'],2) ?>°C</span>
-                    <span class="thermometer"></span>​
+<!-- humidity -->
+<?php if($humidity ==1){?>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-12 mb-3">
+            <center><label class="title-label">Humidity</label><center>
+            <input id="humidity" type="hidden" style="width:inherit">
+        </div>
+        <div class="col-md-6 col-sm-6 col-12">
+            <center><label class="title-label">Humidity Graph</label><center>
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="b" width="100" height="100"></canvas>
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-auto">
+            </div>
+        </div>
+    </div>
+    <br><br>
+<?php } ?>
+
+<!-- altitude -->
+<?php if($altitude ==1){?>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-12 mb-3">
+            <center><label class="title-label">Altitude</label><center>
+            <input id="altitude" type="hidden" style="width:inherit">
+        </div>
+        <div class="col-md-6 col-sm-6 col-12">
+            <center><label class="title-label">Altitude Graph</label><center>
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="c" width="100" height="100"></canvas>
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="col-5">
-    <label class="title-label">Temperature Result Card</label>
-    <div class="card card-stats mb-4 mb-xl-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-                <canvas id="a" width="100" height="100"></canvas>
-            </div>
-            <div class="col-auto">
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+    <br><br>
 <?php } ?>
-<div class="col-1">
-</div>
-</div>
-<br>
-<?php if($humidity==1){?>
-<div class="row" style="text-align: -webkit-center;">
-  <div class="col-1">
-  </div>
-  <div class="col-5">
-    <label class="title-label">Humidity</label>
-    <!-- <div class="card card-stats mb-4 mb-xl-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col"> -->
-                <!-- <span style="margin-left: 30px;"><?php echo number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2) ?>%</span> -->
-                <!-- <span class="hum"></span>​ -->
-                <input id="humidity" type="hidden" style="width:inherit">
-            <!-- </div>
-            <div class="col-auto">
+
+<!-- pressure -->
+<?php if($pressure ==1){?>
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-12 mb-3">
+            <center><label class="title-label">Pressure</label><center>
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col"><br><br><br>
+                            <span class="alt"><b><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2) ?></b> hPa</span>
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-12">
+            <center><label class="title-label">Pressure Graph</label><center>
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="d" width="100" height="100"></canvas>
+                        </div>
+                        <div class="col-auto">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div> -->
-</div>
-<div class="col-5">
-    <label class="title-label">Humidity Result Card</label>
-    <div class="card card-stats mb-4 mb-xl-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-              <canvas id="b" width="100" height="100"></canvas>
-          </div>
-          <div class="col-auto">
-          </div>
-      </div>
-  </div>
-</div>
-</div>
-<div class="col-1">
-</div>
-</div>
-<?php }?>
-<br>
-<?php if($altitude==1){?>
-<div class="row" style="text-align: -webkit-center;">
-  <div class="col-1">
-  </div>
-  <div class="col-5">
-    <label class="title-label">Altitude</label>
-    <!-- <div class="card card-stats mb-xl-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col"> -->
-                <!-- <span class="alt"><b><?php echo number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2) ?></b> m</span> -->
-                <input id="altitude" type="hidden" style="width:inherit">
-            <!-- </div>
-            <div class="col-auto">
-            </div>
-        </div>
-    </div>
-</div> -->
-</div>
-<div class="col-5">
-    <label class="title-label">Altitude Result Card</label>
-    <div class="card card-stats mb-4 mb-xl-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-                <canvas id="c" width="100" height="100"></canvas>
-            </div>
-            <div class="col-auto">
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+    <br><br>
 <?php } ?>
-<div class="col-1">
-</div>
-</div>
-<br>
-<?php if($pressure==1){?>
-<div class="row" style="text-align: -webkit-center;">
-  <div class="col-1">
-  </div>
-  <div class="col-5">
-    <label class="title-label">Pressure</label>
-    <div class="card card-stats mb-4 mb-xl-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col"><br><br><br>
-                <span class="alt"><b><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2) ?></b> hPa</span>
-            </div>
-            <div class="col-auto">
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<div class="col-5">
-    <label class="title-label">Pressure Result Card</label>
-    <div class="card card-stats mb-4 mb-xl-0">
-        <div class="card-body">
-          <div class="row">
-            <div class="col">
-                <canvas id="d" width="100" height="100"></canvas>
-            </div>
-            <div class="col-auto">
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<?php } ?>
-<div class="col-1">
-</div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 <script>
@@ -311,7 +293,7 @@
         type: 'line',
         data: {
             labels: [<?php foreach ($fieldtemperature as $key=>$f) { ?>
-                            <?php echo "'".$f->entry_id."'"?>,
+                            <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'"?>,
                     <?php  } ?>],
             datasets: [{
                 label: 'Temperature',
@@ -319,12 +301,23 @@
                             <?php echo $f->value ?>,
                     <?php  } ?>],
                 backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
+                <?php for($i=0;$i<count($fieldtemperature);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
                 borderColor: [
-                'rgba(255, 99, 132, 1)'
+                <?php for($i=0;$i<count($fieldtemperature);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
-                borderWidth: 1
+                borderWidth: 1,
+                fill: false
             }]
         },
         options: {
@@ -334,7 +327,10 @@
                         beginAtZero: true
                     }
                 }]
-            }
+            },
+            legend: {
+            display: false
+         }
         }
     });
 </script>
@@ -345,7 +341,7 @@
         type: 'line',
         data: {
             labels: [<?php foreach ($fieldhumidity as $key=>$f) { ?>
-                            <?php echo "'".$f->entry_id."'" ?>,
+                            <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  } ?>],
             datasets: [{
                 label: 'Humidity',
@@ -353,12 +349,23 @@
                             <?php echo $f->value ?>,
                     <?php  } ?>],
                 backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
+                <?php for($i=0;$i<count($fieldhumidity);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
                 borderColor: [
-                'rgba(255, 99, 132, 1)'
+                <?php for($i=0;$i<count($fieldhumidity);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
-                borderWidth: 1
+                borderWidth: 1,
+                fill: false
             }]
         },
         options: {
@@ -368,7 +375,10 @@
                         beginAtZero: true
                     }
                 }]
-            }
+            },
+            legend: {
+            display: false
+         }
         }
     });
 </script>
@@ -379,30 +389,31 @@
         type: 'line',
         data: {
             labels: [<?php foreach ($fieldaltitude as $key=>$f) { ?>
-                            <?php echo "'".$f->entry_id."'" ?>,
+                            <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  } ?>],
             datasets: [{
                 label: 'Altitude',
                 data: [<?php foreach ($fieldaltitude as $f) { ?>
                             <?php echo $f->value ?>,
-                    <?php  } ?>,100],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                    <?php  } ?>],
+                    backgroundColor: [
+                <?php for($i=0;$i<count($fieldaltitude);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
                 borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                <?php for($i=0;$i<count($fieldaltitude);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
-                borderWidth: 1
+                borderWidth: 1,
+                fill: false
             }]
         },
         options: {
@@ -412,7 +423,10 @@
                         beginAtZero: true
                     }
                 }]
-            }
+            },
+            legend: {
+            display: false
+         }
         }
     });
 </script>
@@ -423,30 +437,31 @@
         type: 'line',
         data: {
             labels: [<?php foreach ($fieldpressure as $key=>$f) { ?>
-                            <?php echo "'".$f->entry_id."'" ?>,
+                            <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  } ?>],
             datasets: [{
                 label: 'Altitude',
                 data: [<?php foreach ($fieldpressure as $f) { ?>
                             <?php echo $f->value ?>,
-                    <?php  } ?>,100],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                    <?php  } ?>],
+                    backgroundColor: [
+                <?php for($i=0;$i<count($fieldpressure);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
                 borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                <?php for($i=0;$i<count($fieldpressure);$i++){?>
+                'rgba(255,192,203, 1)',
+                'rgba(238,130,238, 1)',
+                'rgba(0,128,0, 1)',
+                'rgba(0,0,255, 1)',
+                <?php } ?>
                 ],
-                borderWidth: 1
+                borderWidth: 1,
+                fill: false
             }]
         },
         options: {
@@ -456,7 +471,10 @@
                         beginAtZero: true
                     }
                 }]
-            }
+            },
+            legend: {
+            display: false
+         }
         }
     });
 </script>
@@ -465,18 +483,30 @@
         // console.log('cek: '+$("#humidity").length);
 
         if($("#humidity").length){
-        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%'});
+        <?php
+            $hum = array();
+            foreach($fieldhumidity as $key=>$val){
+                array_push($hum, $val->value);
+            }
+        ?>
+        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=intVal(max($hum))+1?>'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
         $("#humidity").trigger("keyup");
         }
 </script>
 <script>
     if($("#altitude").length){
-        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m'});
+        <?php
+            $al = array();
+            foreach($fieldaltitude as $key=>$val){
+                array_push($al, $val->value);
+            }
+        ?>
+        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:'<?=intVal(max($al))+1?>'});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
         }
-    </script>
+</script>
 <script>
     // console.log("latC = "+$("#latC").val());
     var lat = document.getElementById('latA').value;
@@ -489,5 +519,14 @@
 	id: 'mapbox.streets',
 	accessToken: 'pk.eyJ1IjoiaW1hZHVkZGluaGFyaXMiLCJhIjoiY2p1d2E3MzM4MGFiZDRkcGYyMWF3emtlYiJ9.KTemDE4IAujR0X-ltttotg'
 }).addTo(mymap);
-var marker = L.marker([lng, lat]).addTo(mymap);
+    L.marker([lng, lat]).addTo(mymap).bindPopup('Current Location')
+                          .openPopup();
+    
+//     L.Routing.control({
+//     waypoints: [
+//         L.latLng(lat, lng),
+//         L.latLng(lat, lng)
+//     ],
+//     routeWhileDragging: true
+// }).addTo(mymap);
 </script>

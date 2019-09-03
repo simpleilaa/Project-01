@@ -43,6 +43,13 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/V_add_channels');
 		$this->load->view('admin/V_footer');
 	}
+	public function edit_channels($id)
+	{
+		$data['chan'] = Channels::where('id',$id)->get();
+		$this->load->view('admin/V_header');
+		$this->load->view('admin/V_edit_channels',$data);
+		$this->load->view('admin/V_footer');
+	}
 
 	public function postchannel()
 	{
@@ -50,14 +57,41 @@ class Admin extends CI_Controller {
 		$channelid = $this->input->post('channelid');
 		$channelkey = $this->input->post('apikey');
 		$channelfield = $this->input->post('channelfield');
+		$channelresult = $this->input->post('channelresult');
+		$channelrefresh = $this->input->post('channelrefresh');
 
 		$data = array(
 			'channel_name'		=> $channelname,
 			'channel_id'		=> $channelid,
 			'channel_key'		=> $channelkey,
-			'channel_field'		=> $channelfield
+			'channel_field'		=> $channelfield,
+			'channel_result'	=> $channelresult,
+			'channel_refresh'	=> $channelrefresh
 		);
 		$post = Channels::create($data);
+		if($post){
+			redirect(base_url().'admin/dashboard');
+		}
+	}
+
+	public function putchannel()
+	{
+		$channelname = $this->input->post('channelname');
+		$channelid = $this->input->post('channelid');
+		$channelkey = $this->input->post('apikey');
+		$channelfield = $this->input->post('channelfield');
+		$channelresult = $this->input->post('channelresult');
+		$channelrefresh = $this->input->post('channelrefresh');
+
+		$data = array(
+			'channel_name'		=> $channelname,
+			'channel_id'		=> $channelid,
+			'channel_key'		=> $channelkey,
+			'channel_field'		=> $channelfield,
+			'channel_result'	=> $channelresult,
+			'channel_refresh'	=> $channelrefresh
+		);
+		$post = Channels::where('id',$this->input->post('id'))->update($data);
 		if($post){
 			redirect(base_url().'admin/dashboard');
 		}
@@ -153,14 +187,14 @@ class Admin extends CI_Controller {
 			$data['humidity']=$humidity;
 			$data['pressure']=$pressure;
 			$data['altitude']=$altitude;
-			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->limit(10)->orderBy('created_at','ASC')->get();
 			// var_dump($data['fieldhumidity'][count($data['fieldhumidity'])-1]['value']);
 			// return false;
-			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->where('created_at', '>=',$date2)->limit(10)->orderBy('created_at','ASC')->get();
 			$data['channelid']=$id;
 			// $data['from'] = '';
 			// $data['to'] = '';
@@ -244,19 +278,19 @@ class Admin extends CI_Controller {
 			$data['humidity']=$humidity;
 			$data['pressure']=$pressure;
 			$data['altitude']=$altitude;
-			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->limit(10)->orderBy('created_at','ASC')->get();
 			// var_dump($data['fieldhumidity'][count($data['fieldhumidity'])-1]['value']);
 			// return false;
-			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->limit(10)->orderBy('created_at','DESC')->get();
-			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->limit(10)->orderBy('created_at','DESC')->get();
+			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->limit(10)->orderBy('created_at','ASC')->get();
+			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->limit(10)->orderBy('created_at','ASC')->get();
 			$data['channelid']=$id;
 			// $data['from'] = '';
 			// $data['to'] = '';
 		}
-		
+		$data['channelname'] = Channels::where('channel_id',$id)->get();
 		$this->load->view('admin/V_header');
 		$this->load->view('admin/V_detail',$data);
 		$this->load->view('admin/V_footer');

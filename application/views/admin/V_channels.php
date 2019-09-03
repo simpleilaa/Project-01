@@ -23,6 +23,7 @@
 						<small class="mb-0">Channels ID : <?=$value->channel_id?></small>
 					</div>
 					<div class="col text-right">
+						<a href="<?=base_url()?>admin/edit_channels/<?=$value->id?>" class="btn btn-sm btn-primary">Edit</a>
 						<a href="<?=base_url()?>admin/detail/<?=$value->channel_id?>" class="btn btn-sm btn-primary">View</a>
 					</div>
 				</div>

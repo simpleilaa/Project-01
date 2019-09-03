@@ -16,6 +16,8 @@ class Login extends CI_Controller {
 	{
 		if ($this->session->userdata('statses') == "login") {
 		redirect(base_url('channel'));
+		}else if ($this->session->userdata('statses') == "admin"){
+		redirect(base_url('admin'));
 		}else{
 		$this->load->view('V_login');
 		}

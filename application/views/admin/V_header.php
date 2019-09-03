@@ -17,12 +17,13 @@
 	<!-- CSS Files -->
 	<script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery/jquery.min.js"></script>
 	<link href="<?php echo base_url();?>/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-   crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-   crossorigin=""></script>
+	<script type="text/javascript" src="<?php echo base_url();?>/assets/js/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+    <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/leaflet-routing-machine.css">
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+<script src="<?php echo base_url();?>/assets/js/leaflet-routing-machine.js"></script>
+<script src="<?php echo base_url();?>/assets/js/l.control.geosearch.js"></script>
+<script src="<?php echo base_url();?>/assets/js/l.geosearch.provider.google.js"></script>
    <link href="<?php echo base_url();?>/assets/css/speedometer.css" rel="stylesheet">
 	<script src="<?php echo base_url();?>/assets/js/speedometer.js"></script>
 	<style>
