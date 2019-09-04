@@ -289,7 +289,7 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<?php foreach ($fieldtemperature as $key=>$f) { if(is_numeric($f->value)){?>
+            labels: ['',<?php foreach ($fieldtemperature as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'"?>,
                     <?php  }} ?>],
             datasets: [{
@@ -330,7 +330,7 @@
     var myChart2 = new Chart(ctx2, {
         type: 'line',
         data: {
-            labels: [<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
+            labels: ['',<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  }} ?>],
             datasets: [{
@@ -371,7 +371,7 @@
     var myChart3 = new Chart(ctx3, {
         type: 'line',
         data: {
-            labels: [<?php foreach ($fieldaltitude as $key=>$f) {if(is_numeric($f->value)){ ?>
+            labels: ['',<?php foreach ($fieldaltitude as $key=>$f) {if(is_numeric($f->value)){ ?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  }} ?>],
             datasets: [{
@@ -412,7 +412,7 @@
     var myChart4 = new Chart(ctx4, {
         type: 'line',
         data: {
-            labels: [<?php foreach ($fieldpressure as $key=>$f) { if(is_numeric($f->value)){?>
+            labels: ['',<?php foreach ($fieldpressure as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  } }?>],
             datasets: [{
