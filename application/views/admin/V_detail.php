@@ -268,7 +268,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col"><br><br><br>
-                            <span class="alt"><b><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2) ?></b> hPa</span>
+                            <span class="alt" style="font-weight:bold;font-size:32px;"><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2)?> <strong style="color:cornflowerblue">hPa</strong></span>
                         </div>
                         <div class="col-auto">
                         </div>
