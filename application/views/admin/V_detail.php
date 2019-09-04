@@ -289,14 +289,14 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['',<?php foreach ($fieldtemperature as $key=>$f) { if(is_numeric($f->value)){?>
+            labels: [<?php foreach ($fieldtemperature as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'"?>,
                     <?php  }} ?>],
             datasets: [{
                 label: 'Temperature',
-                data: [0,<?php foreach ($fieldtemperature as $key=>$f) {if(is_numeric($f->value)){ ?>
+                data: [<?php foreach ($fieldtemperature as $key=>$f) {if(is_numeric($f->value)){ ?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>60],
+                    <?php  }} ?>],
                 backgroundColor: [
                 <?php for($i=0;$i<count($fieldtemperature);$i++){?>
                 'rgba(209, 19, 19,0.2)',
@@ -314,7 +314,9 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: false
+                        beginAtZero: false,
+                        min: 0,
+                        max: 60
                     }
                 }]
             },
@@ -330,14 +332,14 @@
     var myChart2 = new Chart(ctx2, {
         type: 'line',
         data: {
-            labels: ['',<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
+            labels: [<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  }} ?>],
             datasets: [{
                 label: 'Humidity',
-                data: [0,<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
+                data: [<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>100],
+                    <?php  }} ?>],
                 backgroundColor: [
                 <?php for($i=0;$i<count($fieldhumidity);$i++){?>
                 'rgba(238,130,238, 0.2)',
@@ -355,7 +357,9 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: false
+                        beginAtZero: false,
+                        min: 0,
+                        max: 100
                     }
                 }]
             },
@@ -371,14 +375,14 @@
     var myChart3 = new Chart(ctx3, {
         type: 'line',
         data: {
-            labels: ['',<?php foreach ($fieldaltitude as $key=>$f) {if(is_numeric($f->value)){ ?>
+            labels: [<?php foreach ($fieldaltitude as $key=>$f) {if(is_numeric($f->value)){ ?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  }} ?>],
             datasets: [{
                 label: 'Altitude',
-                data: [0,<?php foreach ($fieldaltitude as $f) { if(is_numeric($f->value)){?>
+                data: [<?php foreach ($fieldaltitude as $f) { if(is_numeric($f->value)){?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>200],
+                    <?php  }} ?>],
                     backgroundColor: [
                 <?php for($i=0;$i<count($fieldaltitude);$i++){?>
                 'rgba(0,128,0, 0.2)',
@@ -396,7 +400,9 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: false
+                        beginAtZero: false,
+                        min: 0,
+                        max: 200
                     }
                 }]
             },
@@ -412,14 +418,14 @@
     var myChart4 = new Chart(ctx4, {
         type: 'line',
         data: {
-            labels: ['',<?php foreach ($fieldpressure as $key=>$f) { if(is_numeric($f->value)){?>
+            labels: [<?php foreach ($fieldpressure as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'" ?>,
                     <?php  } }?>],
             datasets: [{
                 label: 'Altitude',
-                data: [980<?php foreach ($fieldpressure as $f) { if(is_numeric($f->value)){ ?>
+                data: [<?php foreach ($fieldpressure as $f) { if(is_numeric($f->value)){ ?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>1020],
+                    <?php  }} ?>],
                     backgroundColor: [
                 <?php for($i=0;$i<count($fieldpressure);$i++){?>
                 'rgba(0,0,255, 0.2)',
@@ -437,7 +443,9 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: false
+                        beginAtZero: false,
+                        min: 980,
+                        max: 1020
                     }
                 }]
             },
@@ -487,7 +495,7 @@
                 }
             }
         ?>
-        $("#altitude").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'m',maxVal:'200'});
+        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:'200'});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
         }
