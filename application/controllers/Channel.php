@@ -64,6 +64,17 @@ class Channel extends CI_Controller {
 
 	public function detail($id)
 	{
+// 	    date_default_timezone_set('Asia/Jakarta');
+// //Contoh Variable Waktu dengan format UTC
+// $timeutc = "2019-09-04T17:06:50Z";
+// //CONVERT UTC TO LOKAL dengan format tgl/bln/thn jam:menit:detik
+// $time1 = strtotime($timeutc.' UTC');
+// $format1 = date("Y-m-d H:i:s", $time1);
+// //CONVERT UTC TO LOKAL dengan format hanya jam:menit:detik
+// $time2 = strtotime($timeutc.' UTC');
+// $format2 = date("H:i:s", $time2);
+// echo "Contoh Konversi 1 : $format1 <br> Contoh Konversi 2 : $format2";
+// return false;
 		
 		if(isset($_GET['setview_time'])&&$_GET['setview_time']!=0&&$_GET['setview_time']!=''){
 			$setview = $_GET['setview_time'];
@@ -82,6 +93,13 @@ class Channel extends CI_Controller {
 			$entid = array();
 			foreach($channel->feeds as $val){
 				for($i=1;$i<=$getChannel[0]['channel_field'];$i++){
+					date_default_timezone_set('Asia/Jakarta');
+				    $time1 = strtotime($val->created_at.' UTC');
+				    $wibtime = date('Y-m-d H:i:s', $time1);
+				    // var_dump($time1);
+				    // var_dump($wibtime);
+				    // var_dump($val->created_at);
+				    // return false;
 					$field = 'field'.$i;
 					array_push($entry,array(
 						'channel_id' 	=> $id,
@@ -89,8 +107,8 @@ class Channel extends CI_Controller {
 						'value' 		=> $val->$field,
 						'field'			=> $field,
 						'entry_id'		=> $val->entry_id,
-						'created_at'	=> $val->created_at,
-						'updated_at'	=> $val->created_at
+						'created_at'	=> $wibtime,
+						'updated_at'	=> $wibtime
 					));
 					array_push($entid,$val->entry_id);
 				}
@@ -171,6 +189,9 @@ class Channel extends CI_Controller {
 			$entid = array();
 			foreach($channel->feeds as $val){
 				for($i=1;$i<=$getChannel[0]['channel_field'];$i++){
+					date_default_timezone_set('Asia/Jakarta');
+				    $time1 = strtotime($val->created_at.' UTC');
+				    $wibtime = date('Y-m-d H:i:s', $time1);
 					$field = 'field'.$i;
 					array_push($entry,array(
 						'channel_id' 	=> $id,
@@ -178,8 +199,8 @@ class Channel extends CI_Controller {
 						'value' 		=> $val->$field,
 						'field'			=> $field,
 						'entry_id'		=> $val->entry_id,
-						'created_at'	=> $val->created_at,
-						'updated_at'	=> $val->created_at
+						'created_at'	=> $wibtime,
+						'updated_at'	=> $wibtime
 					));
 					array_push($entid,$val->entry_id);
 				}
@@ -238,20 +259,29 @@ class Channel extends CI_Controller {
 			}
 			// return false;
 			$limit = 6 * $getChannel[0]['channel_field'];
+			// $countent = Entrys::where('channel_id',$id)->groupBy('field')->count();
+			// var_dump($countent);
+			// return false;
+			$counttemp = Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->latest()->take(20)->orderBy('created_at','ASC')->count();
+			$countlat = Entrys::where('channel_id',$id)->where('field',$fieldlat)->latest()->take(20)->orderBy('created_at','ASC')->count();
+			$countlng = Entrys::where('channel_id',$id)->where('field',$fieldlng)->latest()->take(20)->orderBy('created_at','ASC')->count();
+			$counthumidity = Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->latest()->take(20)->orderBy('created_at','ASC')->count();
+			$countpressure = Entrys::where('channel_id',$id)->where('field',$fieldpressure)->latest()->take(20)->orderBy('created_at','ASC')->count();
+			$countaltitude = Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->latest()->take(20)->orderBy('created_at','ASC')->count();
 			$data['channels'] = Entrys::where('channel_id',$id)->limit($limit)->get();
 			$data['temperature']=$temperature;
 			$data['location']=$location;
 			$data['humidity']=$humidity;
 			$data['pressure']=$pressure;
 			$data['altitude']=$altitude;
-			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->latest()->take(20)->orderBy('created_at','ASC')->get();
-			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->latest()->take(20)->orderBy('created_at','ASC')->get();
-			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->latest()->take(20)->orderBy('created_at','ASC')->get();
-			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->latest()->take(20)->orderBy('created_at','ASC')->get();
+			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->skip($counttemp-20)->take($counttemp-($counttemp-20))->orderBy('created_at','ASC')->get();
+			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->skip($countlat-20)->take($countlat-($countlat-20))->orderBy('created_at','ASC')->get();
+			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->skip($countlng-20)->take($countlng-($countlng-20))->orderBy('created_at','ASC')->get();
+			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->skip($counthumidity-20)->take($counthumidity-($counthumidity-20))->orderBy('created_at','ASC')->get();
 			// var_dump($data['fieldhumidity'][count($data['fieldhumidity'])-1]['value']);
 			// return false;
-			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->latest()->take(20)->orderBy('created_at','ASC')->get();
-			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->latest()->take(20)->orderBy('created_at','ASC')->get();
+			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->skip($countpressure-20)->take($countpressure-($countpressure-20))->orderBy('created_at','ASC')->get();
+			$data['fieldaltitude']=Entrys::where('channel_id',$id)->where('field',$fieldaltitude)->skip($countaltitude-20)->take($countaltitude-($countaltitude-20))->orderBy('created_at','ASC')->get();
 			$data['channelid']=$id;
 			// $data['from'] = '';
 			// $data['to'] = '';
