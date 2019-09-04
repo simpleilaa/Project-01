@@ -474,7 +474,7 @@
                 }
             }
         ?>
-        $("#humidity").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'%',maxVal:'100'});
+        $("#humidity").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$max*10?>'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
         $("#humidity").trigger("keyup");
         }
