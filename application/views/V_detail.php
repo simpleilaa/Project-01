@@ -289,14 +289,14 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [<?php foreach ($fieldtemperature as $key=>$f) { ?>
+            labels: [<?php foreach ($fieldtemperature as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo "'".date_format(date_create($f->created_at),'H:i:s')."'"?>,
-                    <?php  } ?>],
+                    <?php  }} ?>],
             datasets: [{
                 label: 'Temperature',
-                data: [<?php foreach ($fieldtemperature as $key=>$f) { ?>
+                data: [<?php foreach ($fieldtemperature as $key=>$f) {if(is_numeric($f->value)){ ?>
                             <?php echo $f->value ?>,
-                    <?php  } ?>],
+                    <?php  }} ?>],
                 backgroundColor: [
                 <?php for($i=0;$i<count($fieldtemperature);$i++){?>
                 'rgba(209, 19, 19,0.2)',
