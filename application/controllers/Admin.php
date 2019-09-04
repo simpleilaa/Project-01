@@ -202,7 +202,7 @@ class Admin extends CI_Controller {
 			$data['fieldtemperature']=Entrys::where('channel_id',$id)->where('field',$fieldtemperature)->where('created_at', '>=',$date2)->orderBy('created_at','ASC')->get();
 			$data['fieldlat']=Entrys::where('channel_id',$id)->where('field',$fieldlat)->where('created_at', '>=',$date2)->orderBy('created_at','ASC')->get();
 			$data['fieldlng']=Entrys::where('channel_id',$id)->where('field',$fieldlng)->orderBy('created_at','ASC')->get();
-			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->orderBy('created_at','ASC')->get();
+			$data['fieldhumidity']=Entrys::where('channel_id',$id)->where('field',$fieldhumidity)->where('created_at', '>=',$date2)->orderBy('created_at','ASC')->get();
 			// var_dump($data['fieldhumidity'][count($data['fieldhumidity'])-1]['value']);
 			// return false;
 			$data['fieldpressure']=Entrys::where('channel_id',$id)->where('field',$fieldpressure)->where('created_at', '>=',$date2)->orderBy('created_at','ASC')->get();
