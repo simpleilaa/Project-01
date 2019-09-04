@@ -190,6 +190,7 @@ class Channel extends CI_Controller {
 				Entrys::where('channel_id',$id)->where('entry_id',$entid[$i])->delete();
 			}
 			Entrys::insert($entry);
+			
 
 			$temperature = 0;
 			$location = 0;
