@@ -474,7 +474,7 @@
                 }
             }
         ?>
-        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$maxs?>'});
+        $("#humidity").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$maxs?>'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
         $("#humidity").trigger("keyup");
         }
@@ -495,7 +495,7 @@
                 }
             }
         ?>
-        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:'<?=$maxs?>'});
+        $("#altitude").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'m',maxVal:'<?=$maxs?>'});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
         }
