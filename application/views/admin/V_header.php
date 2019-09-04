@@ -67,6 +67,10 @@
 		   background-color:#63ccc5 !important;
 		   border-color:#63ccc5 !important;
 	   }
+	   .numb, .nob {
+		   opacity:1;
+		   box-shadow:none;
+	   }
     </style>
 </head>
 
@@ -78,7 +82,7 @@
 				<!-- Brand -->
 				<a class="h4 mb-0 text-white d-none d-lg-inline-block" href="<?=base_url()?>">
 					   <!-- <img src="<?=base_url()?>assets/img/logo.png" class="img-fluid" style="width:150px"> -->
-					   <p style="font-size:24px; font-family: Open Sans, sans-serif;font-weight:bold;background-color: #f8f9fe;color:#63ccc5;padding:5px;border-radius:5px;">IoT oasis</p>
+					   <p style="font-size:45px; font-family: Open Sans, sans-serif;font-weight:bold;background-color: #f8f9fe;color:#63ccc5;padding:5px;border-radius:5px;">IoT oasis</p>
 				</a>
 				<!-- Form -->
 
@@ -88,7 +92,7 @@
 						<a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<div class="media align-items-center">
 								<span class="avatar avatar-sm rounded-circle">
-									<img alt="Image placeholder" src="<?php echo base_url();?>//assets/img/theme/team-4-800x800.jpg">
+									<img alt="Image placeholder" src="<?php echo base_url();?>assets/img/user.jpeg">
 								</span>
 								<div class="media-body ml-2 d-none d-lg-block">
 									<span class="mb-0 text-sm  font-weight-bold"><?php echo $this->session->userdata('username');?></span>

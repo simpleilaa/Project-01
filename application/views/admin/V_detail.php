@@ -121,9 +121,9 @@
             <a href="<?=base_url()?>" class="btn btn-primary mb-2 btn-sm">Back to List Channel</a>
         </div> -->
         <div class="col-12">
-            <a href="<?=base_url()?>" class="btn btn-primary mb-2 btn-sm">Back to List Channel</a>
+            <a href="<?=base_url()?>" class="btn btn-primary mb-2 btn-sm">List of Channels</a>
             <h2 style="color: #333"><?=$channelname[0]['channel_name']?></h2>
-            <h3 style="color: #333">CHANNELS ID : <?php echo $channelid; ?></h3>
+            <h3 style="color: #333">Channel ID : <?php echo $channelid; ?></h3>
         </div>
     </div>
 </div><br><br>
@@ -183,8 +183,8 @@
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col">
-                            <span style="margin-left: 30px;"><?php echo number_format($fieldtemperature[count($fieldtemperature)-1]['value'],2) ?>°C</span>
+                        <div class="col text-center">
+                            <span class="font-weight-bold  ml-4 mb-4"><?php echo number_format($fieldtemperature[count($fieldtemperature)-1]['value'],2) ?>°C</span>
                             <span class="thermometer"></span>​
                         </div>
                         <div class="col-auto">
@@ -268,7 +268,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col"><br><br><br>
-                            <span class="alt" style="font-weight:bold;font-size:32px;"><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2)?> <strong style="color:cornflowerblue">hPa</strong></span>
+                            <span class="alt" style="font-weight:bold;font-size:32px;"><?php echo number_format($fieldpressure[count($fieldpressure)-1]['value'],2)?> hPa</span>
                         </div>
                         <div class="col-auto">
                         </div>
@@ -485,7 +485,7 @@
                 }
             }
         ?>
-        $("#humidity").myfunc({maxVal:100,divFact:5,eventListenerType:'keyup',gagueLabel:'%'});
+        $("#humidity").myfunc({maxVal:100,divFact:5,eventListenerType:'keyup',gagueLabel:'%',dangerLevel: 120});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
         $("#humidity").trigger("keyup");
         }
@@ -506,7 +506,7 @@
                 }
             }
         ?>
-        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:200});
+        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:200,dangerLevel: 220});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
         }
