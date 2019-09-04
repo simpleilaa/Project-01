@@ -475,9 +475,9 @@
             }
         ?>
         $("#humidity").val(0);
-        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%',maxVal:'110'});
+        $("#humidity").myfunc({divFact:10,eventListenerType:'change',gagueLabel:'%',maxVal:'110'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
-        $("#humidity").trigger("keyup");
+        $("#humidity").trigger("change");
         }
 </script>
 <script>
