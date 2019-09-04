@@ -117,16 +117,22 @@
 </style>
 <div class="container-fluid mt--7">
     <div class="row">
+        <!-- <div class="col-12">
+            <a href="<?=base_url()?>" class="btn btn-primary mb-2 btn-sm">Back to List Channel</a>
+        </div> -->
         <div class="col-12">
             <a href="<?=base_url()?>" class="btn btn-primary mb-2 btn-sm">Back to List Channel</a>
-            <h3 style="color: white"><?=$channelname[0]['channel_name']?></h3>
-            <h4 style="color: white">CHANNELS ID : <?php echo $channelid; ?></h4>
-          <br>
-      </div>
-  </div>
-  <div class="row">
-        <div class="col-md-2 col-sm-2"></div>
-        <form class="form-inline col-md-8 col-sm-8" method="get" action="#">
+            <h2 style="color: #333"><?=$channelname[0]['channel_name']?></h2>
+            <h3 style="color: #333">CHANNELS ID : <?php echo $channelid; ?></h3>
+        </div>
+    </div>
+</div><br><br>
+    <div class="row">
+        <div class="col-md-2">
+             
+        </div>
+        <div class="col-md-8 col-sm-6 col-12 mb-3">
+            <form class="form-inline p-0 ml--3" method="get" action="#" style="float:left">
                 <div class="col-md-12 col-sm-12">
                     <select name="setview_time" class="form-control form-control-sm mb-2">
                         <option value="0">All</option>
@@ -139,27 +145,32 @@
                     <button type="submit" class="btn btn-primary mb-2 btn-sm form-control-sm">Range of Graph</button>
                 </div>       
             </form>
-        <div class="col-md-2 col-sm-2"></div>
+            <div class="row" style="float:right">
+                <?php if($location ==1){?>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input form-control-sm" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Tracking Path</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input form-control-sm" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
+                        <label class="form-check-label" for="inlineRadio2">Current Location</label>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
     </div>
-
 <!-- maps -->
 <?php if($location ==1){?>
     <div class="row">
-        <div class="col-md-2 col-sm-2"></div>
-        </div class="col-md-8 col-sm-8">
-            <center>
-                <h4>CURRENT LOCATION</h4>
-                <div class="row">
-                    <div class="col-md-2 col-sm-3 col-1"></div>
-                    <div id="mapid" class="col-md-8 col-sm-6 col-10"></div>
-                    <div class="col-md-2 col-sm-3 col-1"></div>
-                    <input type="hidden" id="latA" name="latA" value="<?=$fieldlat[count($fieldlat)-1]['value']?>">
-                    <input type="hidden" id="lngA" name="lngA" value="<?=$fieldlng[count($fieldlng)-1]['value']?>">
-                </div>
-            </center>
+        <div class="col-md-2"></div>
+        <div class="col-md-10 col-sm-6 col-12 mb-3 pl-4">
+            <div class="row">
+                <div id="mapid" class="col-md-10"></div>
+                <input type="hidden" id="latA" name="latA" value="<?=$fieldlat[count($fieldlat)-1]['value']?>">
+                <input type="hidden" id="lngA" name="lngA" value="<?=$fieldlng[count($fieldlng)-1]['value']?>">
+            </div>
         </div>
-        </div class="col-md-2 col-sm-2"></div>
-    </div>    
+    </div>
     <br><br>
 <?php } ?>
     
@@ -168,7 +179,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-2 col-sm-6 col-12">
-            <center><label class="title-label">Temperature</label></center>
+            <label class="title-label">Temperature</label>
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -204,7 +215,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-2 col-sm-6 col-12 mb-3">
-            <center><label class="title-label">Humidity</label></center>
+            <label class="title-label">Humidity</label>
             <input id="humidity" type="hidden" style="width:inherit">
         </div>
         <div class="col-md-8 col-sm-6 col-12">
@@ -228,7 +239,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-2 col-sm-6 col-12 mb-3">
-            <center><label class="title-label">Altitude</label></center>
+            <label class="title-label">Altitude</label>
             <input id="altitude" type="hidden" style="width:inherit">
         </div>
         <div class="col-md-8 col-sm-6 col-12">
@@ -252,7 +263,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-2 col-sm-6 col-12 mb-3">
-            </center><label class="title-label">Pressure</label></center>
+            <label class="title-label">Pressure</label>
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
@@ -469,14 +480,12 @@
             $maxs = 0;
             for($i=1; $i<max($hum);$i++){
                 if(max($hum)<($max*$i)){
-                    $maxs = $max * 10;
+                    $maxs = 100;
                     break;
                 }
             }
         ?>
-        $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
-        $("#humidity").trigger("keyup");
-        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$maxs+1?>'});
+        $("#humidity").myfunc({maxVal:100,divFact:5,eventListenerType:'keyup',gagueLabel:'%'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
         $("#humidity").trigger("keyup");
         }
@@ -497,7 +506,7 @@
                 }
             }
         ?>
-        $("#altitude").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'m',maxVal:'<?=$maxs?>'});
+        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:200});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
         }

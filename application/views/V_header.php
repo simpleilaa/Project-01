@@ -62,6 +62,11 @@
 	   {
 		   background-color: rgba(255,255,255, 1) !important;
 	   }
+	   .btn-primary
+	   {
+		   background-color:#63ccc5 !important;
+		   border-color:#63ccc5 !important;
+	   }
 
     </style>
 </head>
@@ -72,8 +77,8 @@
 		<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
 			<div class="container-fluid">
 				<!-- Brand -->
-				<a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="<?=base_url()?>">
-	   				<img src="<?=base_url()?>assets/img/logo.png" class="img-fluid" style="width:100px">
+				<a class="h4 mb-0 text-white d-none d-lg-inline-block" href="<?=base_url()?>">
+	   				<p style="font-size:24px; font-family: Open Sans, sans-serif;font-weight:bold;background-color: #f8f9fe;color:#63ccc5;padding:5px;border-radius:5px;">IoT oasis</p>
 				</a>
 				<!-- Form -->
 
@@ -94,11 +99,11 @@
 							<div class=" dropdown-header noti-title">
 								<h6 class="text-overflow m-0">Welcome!</h6>
 							</div>
-							<!-- <a href="#" class="dropdown-item">
+							<!-- <a href="./examples/profile.html" class="dropdown-item">
 								<i class="ni ni-single-02"></i>
 								<span>My profile</span>
 							</a> -->
-							<!-- <a href="#" class="dropdown-item">
+							<!-- <a href="./examples/profile.html" class="dropdown-item">
 								<i class="ni ni-settings-gear-65"></i>
 								<span>Settings</span>
 							</a> -->
@@ -123,7 +128,7 @@
 		<!-- End Navbar -->
 		<!-- Header -->
 
-		<div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+		<div class="header mb-8 pt-5 pt-md-8" style="background-color:#63ccc5">
 			<div class="container-fluid">
 				<div class="header-body">
 					<!-- Card stats -->
