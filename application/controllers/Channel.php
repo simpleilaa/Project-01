@@ -258,7 +258,7 @@ class Channel extends CI_Controller {
 		}
 		$data['channelname'] = Channels::where('channel_id',$id)->get();
 		$this->load->view('V_header');
-		$this->load->view('V_detail',$data);
+		$this->load->view('admin/V_detail',$data);
 		$this->load->view('V_footer');
 	}
 

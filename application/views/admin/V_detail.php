@@ -294,9 +294,9 @@
                     <?php  }} ?>],
             datasets: [{
                 label: 'Temperature',
-                data: [<?php foreach ($fieldtemperature as $key=>$f) {if(is_numeric($f->value)){ ?>
+                data: [0,<?php foreach ($fieldtemperature as $key=>$f) {if(is_numeric($f->value)){ ?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>],
+                    <?php  }} ?>60],
                 backgroundColor: [
                 <?php for($i=0;$i<count($fieldtemperature);$i++){?>
                 'rgba(209, 19, 19,0.2)',
@@ -335,9 +335,9 @@
                     <?php  }} ?>],
             datasets: [{
                 label: 'Humidity',
-                data: [<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
+                data: [0,<?php foreach ($fieldhumidity as $key=>$f) { if(is_numeric($f->value)){?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>],
+                    <?php  }} ?>100],
                 backgroundColor: [
                 <?php for($i=0;$i<count($fieldhumidity);$i++){?>
                 'rgba(238,130,238, 0.2)',
@@ -376,9 +376,9 @@
                     <?php  }} ?>],
             datasets: [{
                 label: 'Altitude',
-                data: [<?php foreach ($fieldaltitude as $f) { if(is_numeric($f->value)){?>
+                data: [0,<?php foreach ($fieldaltitude as $f) { if(is_numeric($f->value)){?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>],
+                    <?php  }} ?>200],
                     backgroundColor: [
                 <?php for($i=0;$i<count($fieldaltitude);$i++){?>
                 'rgba(0,128,0, 0.2)',
@@ -417,9 +417,9 @@
                     <?php  } }?>],
             datasets: [{
                 label: 'Altitude',
-                data: [<?php foreach ($fieldpressure as $f) { if(is_numeric($f->value)){ ?>
+                data: [980<?php foreach ($fieldpressure as $f) { if(is_numeric($f->value)){ ?>
                             <?php echo $f->value ?>,
-                    <?php  }} ?>],
+                    <?php  }} ?>1020],
                     backgroundColor: [
                 <?php for($i=0;$i<count($fieldpressure);$i++){?>
                 'rgba(0,0,255, 0.2)',
@@ -466,7 +466,7 @@
                 }
             }
         ?>
-        $("#humidity").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$maxs?>'});
+        $("#humidity").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'%',maxVal:'100'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
         $("#humidity").trigger("keyup");
         }
@@ -487,7 +487,7 @@
                 }
             }
         ?>
-        $("#altitude").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'m',maxVal:'<?=$maxs?>'});
+        $("#altitude").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'m',maxVal:'200'});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
         }
