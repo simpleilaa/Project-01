@@ -58,10 +58,10 @@
     .thermometer:after{
         content:' ';
         width:12px;
-        height:<?php $s=($fieldtemperature[count($fieldtemperature)-1]['value']/100)*150; echo $s; ?>px;
+        height:<?php $s=($fieldtemperature[count($fieldtemperature)-1]['value']/60)*150; echo $s; ?>px;
         display:block;
         position:absolute;
-        top:<?php $s=150-($fieldtemperature[count($fieldtemperature)-1]['value']/100*150)+2; echo $s; ?>px;
+        top:<?php $s=150-($fieldtemperature[count($fieldtemperature)-1]['value']/60*150)+2; echo $s; ?>px;
         left:0px;
         background:#c70000;
     }
