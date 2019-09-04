@@ -469,15 +469,14 @@
             $maxs = 0;
             for($i=1; $i<max($hum);$i++){
                 if(max($hum)<($max*$i)){
-                    $maxs = $max*10;
+                    $maxs = $max * $i;
                     break;
                 }
             }
         ?>
-        $("#humidity").val(0);
-        $("#humidity").myfunc({divFact:10,eventListenerType:'change',gagueLabel:'%',maxVal:'110'});
+        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$maxs?>'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
-        $("#humidity").trigger("change");
+        $("#humidity").trigger("keyup");
         }
 </script>
 <script>
@@ -496,7 +495,7 @@
                 }
             }
         ?>
-        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:'200'});
+        $("#altitude").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'m',maxVal:'<?=$maxs?>'});
         $("#altitude").val(<?=number_format($fieldaltitude[count($fieldaltitude)-1]['value'],2)?>);
         $("#altitude").trigger("keyup");
         }
