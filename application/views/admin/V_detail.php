@@ -469,7 +469,7 @@
             $maxs = 0;
             for($i=1; $i<max($hum);$i++){
                 if(max($hum)<($max*$i)){
-                    $maxs = 100;
+                    $maxs = $max*10;
                     break;
                 }
             }
