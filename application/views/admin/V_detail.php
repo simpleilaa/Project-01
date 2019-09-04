@@ -469,12 +469,12 @@
             $maxs = 0;
             for($i=1; $i<max($hum);$i++){
                 if(max($hum)<($max*$i)){
-                    $maxs = $max * $i;
+                    $maxs = $max * 10;
                     break;
                 }
             }
         ?>
-        $("#humidity").myfunc({divFact:5,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$maxs?>'});
+        $("#humidity").myfunc({divFact:10,eventListenerType:'keyup',gagueLabel:'%',maxVal:'<?=$maxs?>'});
         $("#humidity").val(<?=number_format($fieldhumidity[count($fieldhumidity)-1]['value'],2)?>);
         $("#humidity").trigger("keyup");
         }
